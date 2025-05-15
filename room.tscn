@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://svv0ej14ys50"]
+
+[ext_resource type="Script" uid="uid://cav4rmp8fhof3" path="res://Scripts/room.gd" id="1_4o3f6"]
+[ext_resource type="Texture2D" uid="uid://gm4hejy8lv7r" path="res://Sprites/RoomSpritesheet.png" id="1_bisa2"]
+[ext_resource type="PackedScene" uid="uid://dmjobdes2xgpx" path="res://Objects/SidePannel.tscn" id="2_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://duf05x53w4bfn" path="res://Objects/back_wall.tscn" id="4_v5vuv"]
+[ext_resource type="PackedScene" uid="uid://b80xhycomdql1" path="res://Objects/LeftWall.tscn" id="5_ka7wq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5vuv"]
+atlas = ExtResource("1_bisa2")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka7wq"]
+atlas = ExtResource("1_bisa2")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x5k2b"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_v5vuv")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ka7wq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_4o3f6")
+
+[node name="RoomAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x5k2b")
+frame_progress = 0.986159
+
+[node name="SidePannel" parent="." instance=ExtResource("2_4o3f6")]
+position = Vector2(84, -19)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(4.24, 1)
+zoom = Vector2(2, 2)
+
+[node name="BackWall" parent="." instance=ExtResource("4_v5vuv")]
+visibility_layer = 2
+z_index = -1
+position = Vector2(-1, 1)
+
+[node name="LeftWall" parent="." instance=ExtResource("5_ka7wq")]
+z_index = -2
+position = Vector2(-119, -1)
