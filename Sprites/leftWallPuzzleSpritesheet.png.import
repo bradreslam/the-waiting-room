@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg6gri4ug78iu"
-path="res://.godot/imported/leftWallSpritesheet.png-418ac160e5a6539af4e6391a7dfc9d4f.ctex"
+uid="uid://8x6eijcmkjiv"
+path="res://.godot/imported/leftWallPuzzleSpritesheet.png-a70f4c344a54c88b55d060d40c4f2038.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/leftWallSpritesheet.png"
-dest_files=["res://.godot/imported/leftWallSpritesheet.png-418ac160e5a6539af4e6391a7dfc9d4f.ctex"]
+source_file="res://Sprites/leftWallPuzzleSpritesheet.png"
+dest_files=["res://.godot/imported/leftWallPuzzleSpritesheet.png-a70f4c344a54c88b55d060d40c4f2038.ctex"]
 
 [params]
 

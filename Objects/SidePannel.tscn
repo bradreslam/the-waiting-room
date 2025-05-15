@@ -1,15 +1,15 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmjobdes2xgpx"]
+[gd_scene load_steps=35 format=3 uid="uid://dmjobdes2xgpx"]
 
 [ext_resource type="Script" uid="uid://crcbwau1lbgmq" path="res://Scripts/side_pannel.gd" id="1_syg45"]
 [ext_resource type="Texture2D" uid="uid://c0q71yldnumln" path="res://Sprites/sidePannelSpritesheet.png" id="2_rgg1q"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m7813"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_syg45"]
 atlas = ExtResource("2_rgg1q")
-region = Rect2(240, 320, 80, 80)
+region = Rect2(400, 240, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgg1q"]
 atlas = ExtResource("2_rgg1q")
-region = Rect2(320, 320, 80, 80)
+region = Rect2(0, 320, 80, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywi1q"]
 atlas = ExtResource("2_rgg1q")
@@ -91,25 +91,13 @@ region = Rect2(240, 240, 80, 80)
 atlas = ExtResource("2_rgg1q")
 region = Rect2(320, 240, 80, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vi2lg"]
-atlas = ExtResource("2_rgg1q")
-region = Rect2(0, 320, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_php16"]
-atlas = ExtResource("2_rgg1q")
-region = Rect2(80, 320, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hbte2"]
-atlas = ExtResource("2_rgg1q")
-region = Rect2(160, 320, 80, 80)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qdgg"]
 animations = [{
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_m7813")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syg45")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rgg1q")
 }],
 "loop": true,
@@ -176,15 +164,6 @@ animations = [{
 }, {
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_p2pmn")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_vi2lg")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_php16")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_hbte2")
 }],
 "loop": false,
 "name": &"open",
@@ -199,15 +178,75 @@ script/source = "extends CollisionShape2D
 
 "
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_syg45"]
-radius = 4.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_syg45"]
+size = Vector2(7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70np0"]
+atlas = ExtResource("2_rgg1q")
+region = Rect2(80, 320, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7813"]
+atlas = ExtResource("2_rgg1q")
+region = Rect2(160, 320, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywi1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70np0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7813")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_rgg1q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+
+[sub_resource type="Animation" id="Animation_syg45"]
+resource_name = "drag"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.0, Vector2(0, 30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_70np0"]
+_data = {
+&"RESET": SubResource("Animation_rgg1q"),
+&"drag": SubResource("Animation_syg45")
+}
 
 [node name="SidePannel" type="Node2D"]
 script = ExtResource("1_syg45")
 
 [node name="SidePannelAnimation" type="AnimatedSprite2D" parent="."]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_4qdgg")
 animation = &"open"
+frame = 19
 
 [node name="Trigger" type="Area2D" parent="."]
 
@@ -219,8 +258,17 @@ script = SubResource("GDScript_l3aob")
 [node name="RopeEnd" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RopeEnd"]
-position = Vector2(-16, 17)
-shape = SubResource("CircleShape2D_syg45")
+position = Vector2(-17, 17)
+shape = SubResource("RectangleShape2D_syg45")
+
+[node name="Rope" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 3)
+sprite_frames = SubResource("SpriteFrames_ywi1q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rope"]
+libraries = {
+&"": SubResource("AnimationLibrary_70np0")
+}
 
 [connection signal="animation_finished" from="SidePannelAnimation" to="." method="_on_side_pannel_animation_animation_finished"]
 [connection signal="input_event" from="Trigger" to="." method="_on_trigger_input_event"]

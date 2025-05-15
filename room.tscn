@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://svv0ej14ys50"]
+[gd_scene load_steps=12 format=3 uid="uid://svv0ej14ys50"]
 
 [ext_resource type="Script" uid="uid://cav4rmp8fhof3" path="res://Scripts/room.gd" id="1_4o3f6"]
 [ext_resource type="Texture2D" uid="uid://gm4hejy8lv7r" path="res://Sprites/RoomSpritesheet.png" id="1_bisa2"]
 [ext_resource type="PackedScene" uid="uid://dmjobdes2xgpx" path="res://Objects/SidePannel.tscn" id="2_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://duf05x53w4bfn" path="res://Objects/back_wall.tscn" id="4_v5vuv"]
 [ext_resource type="PackedScene" uid="uid://b80xhycomdql1" path="res://Objects/LeftWall.tscn" id="5_ka7wq"]
+[ext_resource type="PackedScene" uid="uid://qwb2olvll37n" path="res://Objects/Key.tscn" id="6_x5k2b"]
+[ext_resource type="PackedScene" uid="uid://cnfo5msjwuuo4" path="res://Objects/left_room.tscn" id="7_8cv3p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5vuv"]
 atlas = ExtResource("1_bisa2")
@@ -28,6 +30,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5k2b"]
+size = Vector2(382, 57)
+
 [node name="Room" type="Node2D"]
 script = ExtResource("1_4o3f6")
 
@@ -50,3 +55,42 @@ position = Vector2(-1, 1)
 [node name="LeftWall" parent="." instance=ExtResource("5_ka7wq")]
 z_index = -2
 position = Vector2(-119, -1)
+
+[node name="leftRoom" parent="LeftWall" instance=ExtResource("7_8cv3p")]
+z_index = -3
+position = Vector2(-1, 0)
+
+[node name="Key" parent="." instance=ExtResource("6_x5k2b")]
+position = Vector2(-54, -65)
+
+[node name="RoomBorder" type="Node2D" parent="."]
+
+[node name="floor" type="StaticBody2D" parent="RoomBorder"]
+position = Vector2(0, 142)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBorder/floor"]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_x5k2b")
+
+[node name="leftWall" type="StaticBody2D" parent="RoomBorder"]
+position = Vector2(-144, -2)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBorder/leftWall"]
+position = Vector2(1, -19)
+shape = SubResource("RectangleShape2D_x5k2b")
+
+[node name="rightWall" type="StaticBody2D" parent="RoomBorder"]
+position = Vector2(144, -2)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBorder/rightWall"]
+position = Vector2(-8.30516e-07, 19)
+shape = SubResource("RectangleShape2D_x5k2b")
+
+[node name="ceiling" type="StaticBody2D" parent="RoomBorder"]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBorder/ceiling"]
+position = Vector2(0, -166.5)
+shape = SubResource("RectangleShape2D_x5k2b")
