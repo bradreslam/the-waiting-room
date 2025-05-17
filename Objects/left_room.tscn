@@ -57,10 +57,10 @@ region = Rect2(120, 0, 40, 40)
 [sub_resource type="SpriteFrames" id="SpriteFrames_2qfgn"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_jtaon")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_7bmp1")
 }],
 "loop": true,
@@ -68,10 +68,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_8xshs")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_wvdgx")
 }],
 "loop": true,
@@ -120,10 +120,10 @@ region = Rect2(120, 40, 40, 40)
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c3ak"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_vp6n1")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_s6ryr")
 }],
 "loop": true,
@@ -131,10 +131,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_vlrb3")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_4cylt")
 }],
 "loop": true,
@@ -183,10 +183,10 @@ region = Rect2(120, 80, 40, 40)
 [sub_resource type="SpriteFrames" id="SpriteFrames_wx2c7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_pg3tf")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_hwknb")
 }],
 "loop": true,
@@ -194,10 +194,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_xjo0q")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_eoxt5")
 }],
 "loop": true,
@@ -246,10 +246,10 @@ region = Rect2(120, 120, 40, 40)
 [sub_resource type="SpriteFrames" id="SpriteFrames_k6mit"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_3sddu")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_avv7x")
 }],
 "loop": true,
@@ -257,10 +257,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_6rt6i")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_b25yx")
 }],
 "loop": true,
@@ -309,10 +309,10 @@ region = Rect2(120, 160, 40, 40)
 [sub_resource type="SpriteFrames" id="SpriteFrames_1vgg7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_qq431")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_whw28")
 }],
 "loop": true,
@@ -320,10 +320,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_y281v")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_62jr8")
 }],
 "loop": true,
@@ -372,10 +372,10 @@ region = Rect2(120, 200, 40, 40)
 [sub_resource type="SpriteFrames" id="SpriteFrames_pkfww"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_xxpxu")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_ayycw")
 }],
 "loop": true,
@@ -383,10 +383,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_sxtym")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_oopmd")
 }],
 "loop": true,
@@ -422,7 +422,7 @@ shape = SubResource("RectangleShape2D_bm27i")
 
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece1"]
 sprite_frames = SubResource("SpriteFrames_2qfgn")
-animation = &"turn"
+animation = &"idle1"
 
 [node name="puzzlePiece2" type="Area2D" parent="."]
 position = Vector2(-12, -64)
@@ -435,7 +435,7 @@ shape = SubResource("RectangleShape2D_s8bps")
 
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece2"]
 sprite_frames = SubResource("SpriteFrames_4c3ak")
-animation = &"turn"
+animation = &"idle1"
 
 [node name="puzzlePiece3" type="Area2D" parent="."]
 position = Vector2(-10, -46)
@@ -447,7 +447,7 @@ shape = SubResource("RectangleShape2D_qlt77")
 
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece3"]
 sprite_frames = SubResource("SpriteFrames_wx2c7")
-animation = &"turn"
+animation = &"idle1"
 
 [node name="puzzlePiece4" type="Area2D" parent="."]
 position = Vector2(17, -74)
@@ -460,7 +460,7 @@ shape = SubResource("RectangleShape2D_xbgdl")
 
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece4"]
 sprite_frames = SubResource("SpriteFrames_k6mit")
-animation = &"turn"
+animation = &"idle1"
 
 [node name="puzzlePiece5" type="Area2D" parent="."]
 position = Vector2(18, -56)
@@ -473,7 +473,7 @@ shape = SubResource("RectangleShape2D_xpx5s")
 
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece5"]
 sprite_frames = SubResource("SpriteFrames_1vgg7")
-animation = &"turn"
+animation = &"idle1"
 
 [node name="puzzlePiece6" type="Area2D" parent="."]
 position = Vector2(18, -42)
@@ -485,4 +485,4 @@ shape = SubResource("RectangleShape2D_77bm3")
 
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece6"]
 sprite_frames = SubResource("SpriteFrames_pkfww")
-animation = &"turn"
+animation = &"idle2"

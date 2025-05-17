@@ -11,7 +11,7 @@ extends Node2D
 var frameIntergers = []
 var moving:bool = false
 
-func _on_area_2d_input_event(_viewport, event, _shape_idx):
+func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
 		Input.set_default_cursor_shape(Input.CURSOR_DRAG)
 		change_left_wall_state(true)
@@ -43,6 +43,7 @@ func _input(event):
 						leftWallAnimation.frame = pos
 						break
 		else:
+			var dedadsa = leftWallAnimation.frame
 			if leftWallAnimation.frame == wallAnimationFrameCount:
 				moving = false
 				Input.set_default_cursor_shape(Input.CURSOR_ARROW)

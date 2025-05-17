@@ -5,8 +5,9 @@ signal clicked
 var held = false
 var drag_speed = 1000.0
 var gravity = 500
-var friction = 500
+var friction = 30
 var bounce = 0.3
+var collision
 
 func _physics_process(delta):
 	if held:
@@ -15,19 +16,18 @@ func _physics_process(delta):
 
 		if direction.length() > 1.0:
 			var move_vec = direction.normalized() * min(direction.length(), drag_speed * delta)
-			var collision = move_and_collide(move_vec)
+			collision = move_and_collide(move_vec)
 	else:
 		velocity.y += gravity * delta
 		
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, friction * delta)
 		
-	var collision = move_and_collide(velocity * delta)
+	collision = move_and_collide(velocity * delta)
 	if collision and not held:
 		# Bounce only when not held
 		var n = collision.get_normal()
 		velocity = velocity.bounce(n) * bounce
-	move_and_slide()
 
 func pickup():
 	if held:
@@ -39,10 +39,9 @@ func drop(impulse=Vector2.ZERO):
 		held = false
 		velocity = impulse
 
-func _on_input_event(_viewport, event, _shape_idx):
+func _on_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
-		if event.pressed:
-			clicked.emit(self)
+		clicked.emit(self)
 
 func _on_mouse_entered():
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)

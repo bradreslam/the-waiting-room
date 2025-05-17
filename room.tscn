@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://svv0ej14ys50"]
+[gd_scene load_steps=13 format=3 uid="uid://svv0ej14ys50"]
 
 [ext_resource type="Script" uid="uid://cav4rmp8fhof3" path="res://Scripts/room.gd" id="1_4o3f6"]
 [ext_resource type="Texture2D" uid="uid://gm4hejy8lv7r" path="res://Sprites/RoomSpritesheet.png" id="1_bisa2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b80xhycomdql1" path="res://Objects/LeftWall.tscn" id="5_ka7wq"]
 [ext_resource type="PackedScene" uid="uid://qwb2olvll37n" path="res://Objects/Key.tscn" id="6_x5k2b"]
 [ext_resource type="PackedScene" uid="uid://cnfo5msjwuuo4" path="res://Objects/left_room.tscn" id="7_8cv3p"]
+[ext_resource type="PackedScene" uid="uid://c0xj68sjraaot" path="res://Objects/ceilingPump.tscn" id="8_01y1d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5vuv"]
 atlas = ExtResource("1_bisa2")
@@ -94,3 +95,6 @@ position = Vector2(0, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBorder/ceiling"]
 position = Vector2(0, -166.5)
 shape = SubResource("RectangleShape2D_x5k2b")
+
+[node name="Node2D" parent="." instance=ExtResource("8_01y1d")]
+position = Vector2(-82, -112)

@@ -66,6 +66,6 @@ func _input(event):
 			moving = false
 			ropeEnd.set_block_signals(false)
 
-func _process(delta):
+func _process(_delta):
 	if moving == false and rope.position.y != 3:
 		rope.position.y = move_toward(rope.position.y, ropeStartPosition, ropeSpeed)
