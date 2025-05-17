@@ -15,6 +15,19 @@ run/main_scene="uid://svv0ej14ys50"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=640
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[global_group]
+
+clickable="makes the cursor change when hovering"
+leftRoomPuzzlePiece=""
+pickable=""
+
 [input]
 
 click={

@@ -12,6 +12,7 @@ func _ready():
 		on = false
 		puzzleAnimation.play("idle2")
 	puzzleAnimation.animation_finished.connect(_on_puzzle_piece_animation_animation_finished)
+
 func _input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
 		if on:

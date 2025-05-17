@@ -1,9 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://cnfo5msjwuuo4"]
+[gd_scene load_steps=57 format=3 uid="uid://cnfo5msjwuuo4"]
 
 [ext_resource type="Texture2D" uid="uid://ciahqb3y78olt" path="res://Sprites/leftRoomSpritesheet.png" id="1_ihb76"]
 [ext_resource type="Script" uid="uid://brg5q7jeii7re" path="res://Scripts/left_room.gd" id="1_oaget"]
 [ext_resource type="Texture2D" uid="uid://8x6eijcmkjiv" path="res://Sprites/leftWallPuzzleSpritesheet.png" id="2_oaget"]
 [ext_resource type="Script" uid="uid://668o7qnoefcx" path="res://Scripts/puzzle_piece.gd" id="3_oaget"]
+[ext_resource type="PackedScene" uid="uid://bxlb5etg4ucko" path="res://Objects/left_room_second_puzzle.tscn" id="5_yri7d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyp0d"]
 atlas = ExtResource("1_ihb76")
@@ -411,7 +412,7 @@ script = ExtResource("1_oaget")
 [node name="leftRoomAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_r324d")
 
-[node name="puzzlePiece1" type="Area2D" parent="."]
+[node name="puzzlePiece1" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(-12, -81)
 script = ExtResource("3_oaget")
 
@@ -424,7 +425,7 @@ shape = SubResource("RectangleShape2D_bm27i")
 sprite_frames = SubResource("SpriteFrames_2qfgn")
 animation = &"idle1"
 
-[node name="puzzlePiece2" type="Area2D" parent="."]
+[node name="puzzlePiece2" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(-12, -64)
 script = ExtResource("3_oaget")
 
@@ -437,7 +438,7 @@ shape = SubResource("RectangleShape2D_s8bps")
 sprite_frames = SubResource("SpriteFrames_4c3ak")
 animation = &"idle1"
 
-[node name="puzzlePiece3" type="Area2D" parent="."]
+[node name="puzzlePiece3" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(-10, -46)
 script = ExtResource("3_oaget")
 
@@ -449,7 +450,7 @@ shape = SubResource("RectangleShape2D_qlt77")
 sprite_frames = SubResource("SpriteFrames_wx2c7")
 animation = &"idle1"
 
-[node name="puzzlePiece4" type="Area2D" parent="."]
+[node name="puzzlePiece4" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(17, -74)
 script = ExtResource("3_oaget")
 
@@ -462,7 +463,7 @@ shape = SubResource("RectangleShape2D_xbgdl")
 sprite_frames = SubResource("SpriteFrames_k6mit")
 animation = &"idle1"
 
-[node name="puzzlePiece5" type="Area2D" parent="."]
+[node name="puzzlePiece5" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(18, -56)
 script = ExtResource("3_oaget")
 
@@ -475,7 +476,7 @@ shape = SubResource("RectangleShape2D_xpx5s")
 sprite_frames = SubResource("SpriteFrames_1vgg7")
 animation = &"idle1"
 
-[node name="puzzlePiece6" type="Area2D" parent="."]
+[node name="puzzlePiece6" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(18, -42)
 script = ExtResource("3_oaget")
 
@@ -486,3 +487,6 @@ shape = SubResource("RectangleShape2D_77bm3")
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece6"]
 sprite_frames = SubResource("SpriteFrames_pkfww")
 animation = &"idle2"
+
+[node name="leftRoomSecondPuzzle" parent="." instance=ExtResource("5_yri7d")]
+position = Vector2(11, 76)

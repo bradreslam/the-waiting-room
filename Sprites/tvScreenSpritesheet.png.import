@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://guatkr6x8r24"
-path="res://.godot/imported/backWallSpritesheet.png-75f9742dd1fd5d07f7c0ddcfa8abcc78.ctex"
+uid="uid://co0j7scw50hwr"
+path="res://.godot/imported/tvScreenSpritesheet.png-4154ea45cd4b9ab3dc9b3ee3bbcdb516.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/backWallSpritesheet.png"
-dest_files=["res://.godot/imported/backWallSpritesheet.png-75f9742dd1fd5d07f7c0ddcfa8abcc78.ctex"]
+source_file="res://Sprites/tvScreenSpritesheet.png"
+dest_files=["res://.godot/imported/tvScreenSpritesheet.png-4154ea45cd4b9ab3dc9b3ee3bbcdb516.ctex"]
 
 [params]
 

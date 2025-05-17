@@ -10,12 +10,13 @@ extends Node2D
 
 var frameIntergers = []
 var moving:bool = false
+signal left_wall_opened
 
 func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
 		Input.set_default_cursor_shape(Input.CURSOR_DRAG)
 		change_left_wall_state(true)
-		wallTop.set_block_signals(true)
+		wallTop.hide()
 
 func change_left_wall_state(opening: bool):
 		frameIntergers.clear()
@@ -39,14 +40,17 @@ func _input(event):
 				var mousePos = get_global_mouse_position().y
 				for d in frameIntergers:
 					var pos = frameIntergers.bsearch(d)
-					if mousePos < d and mousePos > frameIntergers[pos-1]:
-						leftWallAnimation.frame = pos
+					if pos != wallAnimationFrameCount+1:
+						if mousePos < d and mousePos > frameIntergers[pos-1] :
+							leftWallAnimation.frame = pos
+							break
+					else:
 						break
 		else:
-			var dedadsa = leftWallAnimation.frame
 			if leftWallAnimation.frame == wallAnimationFrameCount:
 				moving = false
 				Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+				emit_signal("left_wall_opened")
 			else:
 				var frame:int = leftWallAnimation.frame
 				Input.set_default_cursor_shape(Input.CURSOR_ARROW)
@@ -55,10 +59,4 @@ func _input(event):
 					await get_tree().create_timer(closingSpeed).timeout
 					frame -= 1
 				moving = false
-				wallTop.set_block_signals(false)
-
-func _on_area_2d_mouse_entered():
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-
-func _on_area_2d_mouse_exited():
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+				wallTop.show()

@@ -1,34 +1,72 @@
-[gd_scene load_steps=7 format=3 uid="uid://qwb2olvll37n"]
+[gd_scene load_steps=11 format=3 uid="uid://qwb2olvll37n"]
 
-[ext_resource type="Script" uid="uid://d4agc4c2goout" path="res://Scripts/key.gd" id="1_jqamt"]
+[ext_resource type="Script" uid="uid://d4agc4c2goout" path="res://Scripts/physics.gd" id="1_jqamt"]
 [ext_resource type="Texture2D" uid="uid://bus7c36qie6u1" path="res://Sprites/keySpritesheet.png" id="1_vxhtd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jqamt"]
 height = 43.9888
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ua13b"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqamt"]
 atlas = ExtResource("1_vxhtd")
 region = Rect2(0, 0, 40, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_olkfc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua13b"]
 atlas = ExtResource("1_vxhtd")
 region = Rect2(40, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olkfc"]
+atlas = ExtResource("1_vxhtd")
+region = Rect2(80, 0, 40, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsawc"]
+atlas = ExtResource("1_vxhtd")
+region = Rect2(0, 20, 40, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eslyi"]
+atlas = ExtResource("1_vxhtd")
+region = Rect2(40, 20, 40, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2rix"]
+atlas = ExtResource("1_vxhtd")
+region = Rect2(80, 20, 40, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wsawc"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ua13b")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_jqamt")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_olkfc")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ua13b")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olkfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsawc")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eslyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2rix")
+}],
+"loop": true,
+"name": &"openIdle",
+"speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["pickable"]]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["clickable", "key", "pickable"]]
 z_index = 5
 input_pickable = true
 script = ExtResource("1_jqamt")
@@ -37,11 +75,9 @@ script = ExtResource("1_jqamt")
 rotation = -1.57607
 shape = SubResource("CapsuleShape2D_jqamt")
 
-[node name="keyAnimation" type="AnimatedSprite2D" parent="."]
+[node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wsawc")
-animation = &"idle"
-frame_progress = 0.0203709
+animation = &"openIdle"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://svv0ej14ys50"]
+[gd_scene load_steps=15 format=3 uid="uid://svv0ej14ys50"]
 
 [ext_resource type="Script" uid="uid://cav4rmp8fhof3" path="res://Scripts/room.gd" id="1_4o3f6"]
 [ext_resource type="Texture2D" uid="uid://gm4hejy8lv7r" path="res://Sprites/RoomSpritesheet.png" id="1_bisa2"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://qwb2olvll37n" path="res://Objects/Key.tscn" id="6_x5k2b"]
 [ext_resource type="PackedScene" uid="uid://cnfo5msjwuuo4" path="res://Objects/left_room.tscn" id="7_8cv3p"]
 [ext_resource type="PackedScene" uid="uid://c0xj68sjraaot" path="res://Objects/ceilingPump.tscn" id="8_01y1d"]
+[ext_resource type="PackedScene" uid="uid://1ci1qxbyxcal" path="res://Objects/bottom_pannel.tscn" id="9_42v8c"]
+[ext_resource type="PackedScene" uid="uid://7hsdjvfv561k" path="res://Objects/coin.tscn" id="10_mb7s7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5vuv"]
 atlas = ExtResource("1_bisa2")
@@ -51,18 +53,13 @@ zoom = Vector2(2, 2)
 [node name="BackWall" parent="." instance=ExtResource("4_v5vuv")]
 visibility_layer = 2
 z_index = -1
-position = Vector2(-1, 1)
 
 [node name="LeftWall" parent="." instance=ExtResource("5_ka7wq")]
 z_index = -2
 position = Vector2(-119, -1)
 
-[node name="leftRoom" parent="LeftWall" instance=ExtResource("7_8cv3p")]
-z_index = -3
-position = Vector2(-1, 0)
-
 [node name="Key" parent="." instance=ExtResource("6_x5k2b")]
-position = Vector2(-54, -65)
+position = Vector2(-1, -102)
 
 [node name="RoomBorder" type="Node2D" parent="."]
 
@@ -96,5 +93,15 @@ position = Vector2(0, 2)
 position = Vector2(0, -166.5)
 shape = SubResource("RectangleShape2D_x5k2b")
 
-[node name="Node2D" parent="." instance=ExtResource("8_01y1d")]
+[node name="ceilingPump" parent="." instance=ExtResource("8_01y1d")]
 position = Vector2(-82, -112)
+
+[node name="bottomPannel" parent="." instance=ExtResource("9_42v8c")]
+position = Vector2(4, -99)
+
+[node name="leftRoom" parent="." instance=ExtResource("7_8cv3p")]
+z_index = -3
+position = Vector2(-120, -1)
+
+[node name="coin" parent="." instance=ExtResource("10_mb7s7")]
+position = Vector2(-93, 5)

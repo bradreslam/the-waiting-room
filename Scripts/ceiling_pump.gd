@@ -5,25 +5,34 @@ extends Node2D
 
 var puzzleFixed: bool = false
 
+signal puzzle_check
+signal succesPump
+
 func _ready():
 	hide()
-	pumpAnimation.animation = "open"
-	pumpAnimation.frame = 0
+	var tv = get_node("../bottomPannel")
+	if tv.has_signal("tv_puzzle_solved"):
+		tv.tv_puzzle_solved.connect(self.open_pannel)
+	var puzzle = get_node("../leftRoom")
+	if puzzle.has_signal("puzzle_state"):
+		puzzle.puzzle_state.connect(self.pump)
 
+func _on_pump_trigger_input_event(_viewport, _event, _shape_idx):
+	if Input.is_action_just_pressed("click"):
+		emit_signal("puzzle_check")
 
-func _on_pump_trigger_input_event(viewport, event, shape_idx):
-	if puzzleFixed:
+func pump(solved:bool):
+	pumpTrigger.hide()
+	if solved:
 		pumpAnimation.play("pump")
+		emit_signal("succesPump")
 	else:
 		pumpAnimation.play("failedPump")
 
-func _on_pump_trigger_mouse_entered():
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-
-
-func _on_pump_trigger_mouse_exited():
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-
-
 func _on_pump_animation_animation_finished():
 	pumpAnimation.play("idle")
+	pumpTrigger.show()
+
+func open_pannel():
+	show()
+	pumpAnimation.play("open")

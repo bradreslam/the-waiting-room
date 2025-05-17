@@ -1,32 +1,114 @@
-[gd_scene load_steps=6 format=3 uid="uid://duf05x53w4bfn"]
+[gd_scene load_steps=13 format=3 uid="uid://duf05x53w4bfn"]
 
 [ext_resource type="Script" uid="uid://f0sevo1jutdf" path="res://Scripts/back_wall.gd" id="1_3epp1"]
-[ext_resource type="Texture2D" uid="uid://guatkr6x8r24" path="res://Sprites/BackWallSpritesheet.png" id="1_4bdt6"]
+[ext_resource type="Texture2D" uid="uid://guatkr6x8r24" path="res://Sprites/backWallSpritesheet.png" id="1_4bdt6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqvcf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3epp1"]
 atlas = ExtResource("1_4bdt6")
 region = Rect2(0, 0, 160, 160)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7a4ee"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd0qm"]
 atlas = ExtResource("1_4bdt6")
 region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm4fh"]
+atlas = ExtResource("1_4bdt6")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rjp2"]
+atlas = ExtResource("1_4bdt6")
+region = Rect2(0, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2npo"]
+atlas = ExtResource("1_4bdt6")
+region = Rect2(160, 160, 160, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6ysbe"]
 animations = [{
 "frames": [{
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_xqvcf")
+"texture": SubResource("AtlasTexture_3epp1")
 }, {
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_7a4ee")
+"texture": SubResource("AtlasTexture_dd0qm")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_tm4fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rjp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2npo")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3epp1"]
+size = Vector2(20, 26)
+
+[sub_resource type="Animation" id="Animation_dd0qm"]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.266667, 0.333333, 0.4, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 0.112656),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-3, 0), Vector2(6, 0), Vector2(-6, 0), Vector2(2, 0), Vector2(0, 0), Vector2(0, 170)]
+}
+
+[sub_resource type="Animation" id="Animation_3epp1"]
+resource_name = "opening"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [0.0, Vector2(0, -50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tm4fh"]
+_data = {
+&"RESET": SubResource("Animation_dd0qm"),
+&"opening": SubResource("Animation_3epp1")
+}
 
 [node name="BackWall" type="Node2D"]
 script = ExtResource("1_3epp1")
 
 [node name="BackWallAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6ysbe")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_3epp1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tm4fh")
+}
+
+[connection signal="animation_finished" from="BackWallAnimation" to="." method="_on_back_wall_animation_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

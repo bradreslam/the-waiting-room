@@ -9,49 +9,38 @@ extends Node2D
 @onready var rope = $Rope
 
 var open:bool = false
+var ropeHasBeenPulled: bool = false
 var moving:bool = false
 var ropePullLimit:float = 28
 var ropeStartPosition:float = 3
 
+signal rope_pulled
+
 func _ready():
-	ropeEnd.set_block_signals(true)
 	animator.animation = "open"
 	animator.frame = 0
 	animator.hide()
 	rope.hide()
+	ropeEnd.hide()
 
 func _on_trigger_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
 		animator.show()
 		animator.play("open")
-		trigger.set_block_signals(true)
+		trigger.hide()
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-
-func _on_trigger_mouse_entered():
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-
-func _on_trigger_mouse_exited():
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func _on_side_pannel_animation_animation_finished():
 	animator.play("idle")
 	rope.show()
 	rope.play("default")
-	ropeEnd.set_block_signals(false)
-
-
-func _on_rope_end_mouse_entered():
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-
-
-func _on_rope_end_mouse_exited():
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	ropeEnd.show()
 
 func _on_rope_end_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
 		Input.set_default_cursor_shape(Input.CURSOR_DRAG)
 		moving = true
-		ropeEnd.set_block_signals(true)
+		ropeEnd.hide()
 
 func _input(event):
 	if moving:
@@ -61,10 +50,13 @@ func _input(event):
 				if rope.position.y >= ropePullLimit:
 					Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 					moving = false
-					ropeEnd.set_block_signals(false)
+					ropeEnd.show()
+					if !ropeHasBeenPulled:
+						ropeHasBeenPulled = true
+						emit_signal("rope_pulled")
 		else:
 			moving = false
-			ropeEnd.set_block_signals(false)
+			ropeEnd.show()
 
 func _process(_delta):
 	if moving == false and rope.position.y != 3:

@@ -10,7 +10,7 @@ height = 106.036
 [node name="LeftWall" type="Node2D"]
 script = ExtResource("1_cn0c4")
 
-[node name="leftWallTop" type="Area2D" parent="."]
+[node name="leftWallTop" type="Area2D" parent="." groups=["clickable"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="leftWallTop"]
 position = Vector2(2, -118)
