@@ -2,11 +2,16 @@ extends Node2D
 
 @onready var RoomAnimation: AnimatedSprite2D = $RoomAnimation
 @onready var leftWall: Node2D = $LeftWall
+@onready var backWall: Node2D = $BackWall
+@onready var background: ParallaxBackground = $background
 
 var held_object = null
 
 func _ready():
+	background.hide()
 	RoomAnimation.play("default")
+	if backWall.has_signal("theEnd"):
+		backWall.theEnd.connect(self.ending)
 	if leftWall.has_signal("left_wall_opened"):
 		leftWall.left_wall_opened.connect(self.start_puzzle_left)
 	for node in get_tree().get_nodes_in_group("pickable"):
@@ -15,7 +20,6 @@ func _ready():
 	for node in get_tree().get_nodes_in_group("clickable"):
 		node.mouse_entered.connect(_on_mouse_entered)
 		node.mouse_exited.connect(_on_mouse_exited)
-		
 
 func start_puzzle_left():
 	for node in get_tree().get_nodes_in_group("leftRoomPuzzlePiece"):
@@ -38,3 +42,7 @@ func _unhandled_input(event):
 		if held_object and !event.pressed:
 			held_object.drop((Input.get_last_mouse_velocity() / 5.0))
 			held_object = null
+
+func ending():
+	RoomAnimation.stop()
+	background.show()

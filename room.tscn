@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://svv0ej14ys50"]
+[gd_scene load_steps=21 format=3 uid="uid://svv0ej14ys50"]
 
 [ext_resource type="Script" uid="uid://cav4rmp8fhof3" path="res://Scripts/room.gd" id="1_4o3f6"]
-[ext_resource type="Texture2D" uid="uid://gm4hejy8lv7r" path="res://Sprites/RoomSpritesheet.png" id="1_bisa2"]
+[ext_resource type="Texture2D" uid="uid://besbwb54bovpc" path="res://Sprites/roomSpritesheet.png" id="2_0f4jx"]
 [ext_resource type="PackedScene" uid="uid://dmjobdes2xgpx" path="res://Objects/SidePannel.tscn" id="2_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://duf05x53w4bfn" path="res://Objects/back_wall.tscn" id="4_v5vuv"]
 [ext_resource type="PackedScene" uid="uid://b80xhycomdql1" path="res://Objects/LeftWall.tscn" id="5_ka7wq"]
@@ -10,23 +10,29 @@
 [ext_resource type="PackedScene" uid="uid://c0xj68sjraaot" path="res://Objects/ceilingPump.tscn" id="8_01y1d"]
 [ext_resource type="PackedScene" uid="uid://1ci1qxbyxcal" path="res://Objects/bottom_pannel.tscn" id="9_42v8c"]
 [ext_resource type="PackedScene" uid="uid://7hsdjvfv561k" path="res://Objects/coin.tscn" id="10_mb7s7"]
+[ext_resource type="Script" uid="uid://cqrxi2hjdeflo" path="res://Scripts/background.gd" id="11_0f4jx"]
+[ext_resource type="Texture2D" uid="uid://uhpqe8ikv6v" path="res://Sprites/background/layer1.png" id="11_6tcb1"]
+[ext_resource type="Texture2D" uid="uid://chv1prc64mmk1" path="res://Sprites/background/layer2.png" id="12_0f4jx"]
+[ext_resource type="Texture2D" uid="uid://c1jtg8g40bwhl" path="res://Sprites/background/layer3.png" id="13_i0wn2"]
+[ext_resource type="Texture2D" uid="uid://bntre48aghsoy" path="res://Sprites/background/layer4.png" id="14_l46xq"]
+[ext_resource type="PackedScene" uid="uid://85htevxec0go" path="res://Objects/hint_goblin.tscn" id="16_i0wn2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v5vuv"]
-atlas = ExtResource("1_bisa2")
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0wn2"]
+atlas = ExtResource("2_0f4jx")
 region = Rect2(0, 0, 320, 320)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ka7wq"]
-atlas = ExtResource("1_bisa2")
+[sub_resource type="AtlasTexture" id="AtlasTexture_l46xq"]
+atlas = ExtResource("2_0f4jx")
 region = Rect2(320, 0, 320, 320)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x5k2b"]
 animations = [{
 "frames": [{
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_v5vuv")
+"texture": SubResource("AtlasTexture_i0wn2")
 }, {
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_ka7wq")
+"texture": SubResource("AtlasTexture_l46xq")
 }],
 "loop": true,
 "name": &"default",
@@ -45,10 +51,6 @@ frame_progress = 0.986159
 
 [node name="SidePannel" parent="." instance=ExtResource("2_4o3f6")]
 position = Vector2(84, -19)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(4.24, 1)
-zoom = Vector2(2, 2)
 
 [node name="BackWall" parent="." instance=ExtResource("4_v5vuv")]
 visibility_layer = 2
@@ -105,3 +107,44 @@ position = Vector2(-120, -1)
 
 [node name="coin" parent="." instance=ExtResource("10_mb7s7")]
 position = Vector2(-93, 5)
+
+[node name="background" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+scroll_ignore_camera_zoom = true
+script = ExtResource("11_0f4jx")
+scroll_speed = Vector2(100, 10)
+
+[node name="layer1" type="ParallaxLayer" parent="background"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(200, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/layer1"]
+texture = ExtResource("11_6tcb1")
+
+[node name="layer2" type="ParallaxLayer" parent="background"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(200, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/layer2"]
+texture = ExtResource("12_0f4jx")
+
+[node name="layer3" type="ParallaxLayer" parent="background"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(200, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/layer3"]
+texture = ExtResource("13_i0wn2")
+
+[node name="layer4" type="ParallaxLayer" parent="background"]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(200, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/layer4"]
+texture = ExtResource("14_l46xq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(4.24, 1)
+zoom = Vector2(2, 2)
+
+[node name="HintGoblin" parent="." instance=ExtResource("16_i0wn2")]
+position = Vector2(55, -111)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=57 format=3 uid="uid://cnfo5msjwuuo4"]
+[gd_scene load_steps=58 format=3 uid="uid://cnfo5msjwuuo4"]
 
 [ext_resource type="Texture2D" uid="uid://ciahqb3y78olt" path="res://Sprites/leftRoomSpritesheet.png" id="1_ihb76"]
 [ext_resource type="Script" uid="uid://brg5q7jeii7re" path="res://Scripts/left_room.gd" id="1_oaget"]
 [ext_resource type="Texture2D" uid="uid://8x6eijcmkjiv" path="res://Sprites/leftWallPuzzleSpritesheet.png" id="2_oaget"]
 [ext_resource type="Script" uid="uid://668o7qnoefcx" path="res://Scripts/puzzle_piece.gd" id="3_oaget"]
+[ext_resource type="AudioStream" uid="uid://dp5kftqqlu0xx" path="res://Sounds/metal_turn.wav" id="4_pyp0d"]
 [ext_resource type="PackedScene" uid="uid://bxlb5etg4ucko" path="res://Objects/left_room_second_puzzle.tscn" id="5_yri7d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pyp0d"]
@@ -415,6 +416,7 @@ sprite_frames = SubResource("SpriteFrames_r324d")
 [node name="puzzlePiece1" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(-12, -81)
 script = ExtResource("3_oaget")
+turnNoise = ExtResource("4_pyp0d")
 
 [node name="puzzlePieceShape" type="CollisionShape2D" parent="puzzlePiece1"]
 position = Vector2(-3, 0)
@@ -425,9 +427,12 @@ shape = SubResource("RectangleShape2D_bm27i")
 sprite_frames = SubResource("SpriteFrames_2qfgn")
 animation = &"idle1"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="puzzlePiece1"]
+
 [node name="puzzlePiece2" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(-12, -64)
 script = ExtResource("3_oaget")
+turnNoise = ExtResource("4_pyp0d")
 
 [node name="puzzlePieceShape" type="CollisionShape2D" parent="puzzlePiece2"]
 position = Vector2(-2.41902, 5.3248)
@@ -438,9 +443,12 @@ shape = SubResource("RectangleShape2D_s8bps")
 sprite_frames = SubResource("SpriteFrames_4c3ak")
 animation = &"idle1"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="puzzlePiece2"]
+
 [node name="puzzlePiece3" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(-10, -46)
 script = ExtResource("3_oaget")
+turnNoise = ExtResource("4_pyp0d")
 
 [node name="puzzlePieceShape" type="CollisionShape2D" parent="puzzlePiece3"]
 position = Vector2(-3, 7)
@@ -450,9 +458,12 @@ shape = SubResource("RectangleShape2D_qlt77")
 sprite_frames = SubResource("SpriteFrames_wx2c7")
 animation = &"idle1"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="puzzlePiece3"]
+
 [node name="puzzlePiece4" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(17, -74)
 script = ExtResource("3_oaget")
+turnNoise = ExtResource("4_pyp0d")
 
 [node name="puzzlePieceShape" type="CollisionShape2D" parent="puzzlePiece4"]
 position = Vector2(-4, 7)
@@ -463,9 +474,12 @@ shape = SubResource("RectangleShape2D_xbgdl")
 sprite_frames = SubResource("SpriteFrames_k6mit")
 animation = &"idle1"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="puzzlePiece4"]
+
 [node name="puzzlePiece5" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(18, -56)
 script = ExtResource("3_oaget")
+turnNoise = ExtResource("4_pyp0d")
 
 [node name="puzzlePieceShape" type="CollisionShape2D" parent="puzzlePiece5"]
 position = Vector2(-5, 3)
@@ -476,9 +490,12 @@ shape = SubResource("RectangleShape2D_xpx5s")
 sprite_frames = SubResource("SpriteFrames_1vgg7")
 animation = &"idle1"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="puzzlePiece5"]
+
 [node name="puzzlePiece6" type="Area2D" parent="." groups=["leftRoomPuzzlePiece"]]
 position = Vector2(18, -42)
 script = ExtResource("3_oaget")
+turnNoise = ExtResource("4_pyp0d")
 
 [node name="puzzlePieceShape" type="CollisionShape2D" parent="puzzlePiece6"]
 position = Vector2(-4, 7)
@@ -487,6 +504,8 @@ shape = SubResource("RectangleShape2D_77bm3")
 [node name="puzzlePieceAnimation" type="AnimatedSprite2D" parent="puzzlePiece6"]
 sprite_frames = SubResource("SpriteFrames_pkfww")
 animation = &"idle2"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="puzzlePiece6"]
 
 [node name="leftRoomSecondPuzzle" parent="." instance=ExtResource("5_yri7d")]
 position = Vector2(11, 76)

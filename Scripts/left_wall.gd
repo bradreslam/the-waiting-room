@@ -2,21 +2,29 @@ extends Node2D
 
 @export var wallAnimationFrameCount: int = 17
 @export var closingSpeed: float = 0.01
+@export var slide:AudioStream
 
 @onready var wallTop : Area2D = $leftWallTop
 @onready var wallBottom : Area2D = $leftWallBottom
 @onready var leftWallAnimation : Sprite2D = $leftWallAnimation
 @onready var downCast : RayCast2D = $leftWallDownCast
+@onready var audioPlayer:AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var frameIntergers = []
 var moving:bool = false
+var playingAudio:bool = false
+
 signal left_wall_opened
 
 func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_just_pressed("click"):
-		Input.set_default_cursor_shape(Input.CURSOR_DRAG)
 		change_left_wall_state(true)
 		wallTop.hide()
+
+func play_audio():
+	if audioPlayer.finished:
+		audioPlayer.stream = slide
+		audioPlayer.play()
 
 func change_left_wall_state(opening: bool):
 		frameIntergers.clear()
@@ -43,6 +51,9 @@ func _input(event):
 					if pos != wallAnimationFrameCount+1:
 						if mousePos < d and mousePos > frameIntergers[pos-1] :
 							leftWallAnimation.frame = pos
+							if !playingAudio:
+								play_audio()
+								playingAudio = true
 							break
 					else:
 						break
@@ -60,3 +71,7 @@ func _input(event):
 					frame -= 1
 				moving = false
 				wallTop.show()
+
+
+func _on_audio_stream_player_2d_finished():
+	playingAudio = false

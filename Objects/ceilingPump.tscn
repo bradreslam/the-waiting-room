@@ -1,7 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://c0xj68sjraaot"]
+[gd_scene load_steps=32 format=3 uid="uid://c0xj68sjraaot"]
 
 [ext_resource type="Texture2D" uid="uid://d3pgw8m204ad3" path="res://Sprites/pumpSpritesheet.png" id="1_6hvs2"]
 [ext_resource type="Script" uid="uid://dd6cv130cfeqe" path="res://Scripts/ceiling_pump.gd" id="1_b2cc2"]
+[ext_resource type="AudioStream" uid="uid://cll2tts5h2tl3" path="res://Sounds/slide.wav" id="2_ce4vd"]
+[ext_resource type="AudioStream" uid="uid://d4h1532rfoe6d" path="res://Sounds/metal_clank.wav" id="3_07dsx"]
+[ext_resource type="AudioStream" uid="uid://bqx7ni1crkxmm" path="res://Sounds/steam_noise.wav" id="4_mb5ey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2cc2"]
 atlas = ExtResource("1_6hvs2")
@@ -199,6 +202,9 @@ size = Vector2(43, 13)
 
 [node name="CeilingPump" type="Node2D"]
 script = ExtResource("1_b2cc2")
+pumpNoise = ExtResource("2_ce4vd")
+pompFailNoise = ExtResource("3_07dsx")
+steamHissNoise = ExtResource("4_mb5ey")
 
 [node name="pumpAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_n50kn")
@@ -209,6 +215,8 @@ animation = &"failedPump"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pumpTrigger"]
 position = Vector2(-12.5, 8.5)
 shape = SubResource("RectangleShape2D_aunxq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="animation_finished" from="pumpAnimation" to="." method="_on_pump_animation_animation_finished"]
 [connection signal="input_event" from="pumpTrigger" to="." method="_on_pump_trigger_input_event"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://duf05x53w4bfn"]
+[gd_scene load_steps=15 format=3 uid="uid://duf05x53w4bfn"]
 
 [ext_resource type="Script" uid="uid://f0sevo1jutdf" path="res://Scripts/back_wall.gd" id="1_3epp1"]
 [ext_resource type="Texture2D" uid="uid://guatkr6x8r24" path="res://Sprites/backWallSpritesheet.png" id="1_4bdt6"]
+[ext_resource type="AudioStream" uid="uid://rnliwqfrjj0" path="res://Sounds/unlock.wav" id="2_1rjp2"]
+[ext_resource type="Texture2D" uid="uid://b01whplpt7ykh" path="res://Sprites/endText.png" id="3_dd0qm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3epp1"]
 atlas = ExtResource("1_4bdt6")
@@ -54,8 +56,23 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3epp1"]
 size = Vector2(20, 26)
 
+[sub_resource type="Animation" id="Animation_tm4fh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -132)]
+}
+
 [sub_resource type="Animation" id="Animation_dd0qm"]
-length = 2.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -63,38 +80,37 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.266667, 0.333333, 0.4, 0.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 0.112656),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(5.27804, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-3, 0), Vector2(6, 0), Vector2(-6, 0), Vector2(2, 0), Vector2(0, 0), Vector2(0, 170)]
+"values": [Vector2(0, 0), Vector2(0, 170)]
 }
-
-[sub_resource type="Animation" id="Animation_3epp1"]
-resource_name = "opening"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 0.5),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.96667, 5),
+"transitions": PackedFloat32Array(0.406126, 1),
 "update": 0,
-"values": [0.0, Vector2(0, -50)]
+"values": [Vector2(0, -362), Vector2(0, -170)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tm4fh"]
 _data = {
-&"RESET": SubResource("Animation_dd0qm"),
-&"opening": SubResource("Animation_3epp1")
+&"RESET": SubResource("Animation_tm4fh"),
+&"opening": SubResource("Animation_dd0qm")
 }
 
 [node name="BackWall" type="Node2D"]
 script = ExtResource("1_3epp1")
+unlock = ExtResource("2_1rjp2")
 
 [node name="BackWallAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6ysbe")
+animation = &"opening"
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -107,8 +123,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_tm4fh")
 }
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -132)
+texture = ExtResource("3_dd0qm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="animation_finished" from="BackWallAnimation" to="." method="_on_back_wall_animation_animation_finished"]
+[connection signal="frame_changed" from="BackWallAnimation" to="." method="_on_back_wall_animation_frame_changed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

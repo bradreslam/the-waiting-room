@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://qwb2olvll37n"]
+[gd_scene load_steps=12 format=3 uid="uid://qwb2olvll37n"]
 
 [ext_resource type="Script" uid="uid://d4agc4c2goout" path="res://Scripts/physics.gd" id="1_jqamt"]
 [ext_resource type="Texture2D" uid="uid://bus7c36qie6u1" path="res://Sprites/keySpritesheet.png" id="1_vxhtd"]
+[ext_resource type="AudioStream" uid="uid://dpramytipsui0" path="res://Sounds/metal_drop.wav" id="3_ua13b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jqamt"]
 height = 43.9888
@@ -70,6 +71,7 @@ animations = [{
 z_index = 5
 input_pickable = true
 script = ExtResource("1_jqamt")
+collisionNoise = ExtResource("3_ua13b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.57607
@@ -78,6 +80,9 @@ shape = SubResource("CapsuleShape2D_jqamt")
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wsawc")
 animation = &"openIdle"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ua13b")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]

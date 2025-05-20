@@ -1,9 +1,22 @@
-[gd_scene load_steps=104 format=3 uid="uid://1ci1qxbyxcal"]
+[gd_scene load_steps=117 format=3 uid="uid://1ci1qxbyxcal"]
 
 [ext_resource type="Script" uid="uid://q52d770aduqs" path="res://Scripts/bottom_pannel.gd" id="1_3gtsv"]
 [ext_resource type="Texture2D" uid="uid://c817lngr8cvy8" path="res://Sprites/floorPannelSpritesheet.png" id="1_vkh0j"]
+[ext_resource type="AudioStream" uid="uid://b2oymo47vcp0x" path="res://Sounds/static.wav" id="2_7xdqn"]
+[ext_resource type="AudioStream" uid="uid://c5e2tsy1krukd" path="res://Sounds/balloon_inflate.wav" id="2_b6qpy"]
 [ext_resource type="Texture2D" uid="uid://co0j7scw50hwr" path="res://Sprites/tvScreenSpritesheet.png" id="2_lfkub"]
 [ext_resource type="Texture2D" uid="uid://delt126h55qsw" path="res://Sprites/cloudSpritesheet.png" id="3_3gtsv"]
+[ext_resource type="AudioStream" uid="uid://b2uiosr8h5bt2" path="res://Sounds/balloon_pop.wav" id="3_3sfgo"]
+[ext_resource type="AudioStream" uid="uid://brp06vfd0afeq" path="res://Sounds/bird_sounds.wav" id="3_u1hgx"]
+[ext_resource type="AudioStream" uid="uid://dwn7t4ppvgxx6" path="res://Sounds/tv_voice1.wav" id="3_v2cit"]
+[ext_resource type="AudioStream" uid="uid://cibdelt2l5153" path="res://Sounds/goblin.wav" id="4_3sfgo"]
+[ext_resource type="AudioStream" uid="uid://cdb4qnpf16m3e" path="res://Sounds/gun_shot.wav" id="4_u1hgx"]
+[ext_resource type="AudioStream" uid="uid://cyw7bcdju8bh3" path="res://Sounds/machine_noise.wav" id="6_8jv7m"]
+[ext_resource type="AudioStream" uid="uid://b1620kch47cy2" path="res://Sounds/tv_voice2.wav" id="6_u1hgx"]
+[ext_resource type="AudioStream" uid="uid://cll2tts5h2tl3" path="res://Sounds/slide.wav" id="7_3dx3m"]
+[ext_resource type="AudioStream" uid="uid://d4h1532rfoe6d" path="res://Sounds/metal_clank.wav" id="8_rxdpi"]
+[ext_resource type="AudioStream" uid="uid://bqx7ni1crkxmm" path="res://Sounds/steam_noise.wav" id="9_8jv7m"]
+[ext_resource type="AudioStream" uid="uid://daglmptgwlmla" path="res://Sounds/button.wav" id="10_3dx3m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6xjlp"]
 atlas = ExtResource("1_vkh0j")
@@ -490,6 +503,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a68ke"]
 size = Vector2(39, 25)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7q47"]
+atlas = ExtResource("2_lfkub")
+region = Rect2(240, 210, 120, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nd0y"]
+atlas = ExtResource("2_lfkub")
+region = Rect2(360, 210, 120, 70)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qk37"]
 atlas = ExtResource("2_lfkub")
 region = Rect2(0, 0, 120, 70)
@@ -546,16 +567,19 @@ region = Rect2(0, 210, 120, 70)
 atlas = ExtResource("2_lfkub")
 region = Rect2(120, 210, 120, 70)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x7q47"]
-atlas = ExtResource("2_lfkub")
-region = Rect2(240, 210, 120, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5nd0y"]
-atlas = ExtResource("2_lfkub")
-region = Rect2(360, 210, 120, 70)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_y0u0m"]
 animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_x7q47")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_5nd0y")
+}],
+"loop": true,
+"name": &"channel1",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_0qk37")
@@ -564,18 +588,18 @@ animations = [{
 "texture": SubResource("AtlasTexture_dbear")
 }],
 "loop": true,
-"name": &"channel1",
+"name": &"channel2",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_biv8i")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_w2t0m")
 }],
 "loop": true,
-"name": &"channel2",
+"name": &"channel3",
 "speed": 5.0
 }, {
 "frames": [{
@@ -586,26 +610,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_y2dli")
 }],
 "loop": true,
-"name": &"channel3",
+"name": &"channel4",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_hhlgt")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hxuus")
-}],
-"loop": true,
-"name": &"channel4",
-"speed": 5.0
-}, {
-"frames": [{
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_4ba0g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0hwq3")
+"texture": SubResource("AtlasTexture_hxuus")
 }],
 "loop": true,
 "name": &"channel5",
@@ -613,13 +626,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_y78p8")
+"texture": SubResource("AtlasTexture_4ba0g")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cg06u")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_0hwq3")
 }],
 "loop": true,
 "name": &"channel6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_y78p8")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_cg06u")
+}],
+"loop": true,
+"name": &"channel7",
 "speed": 5.0
 }, {
 "frames": [{
@@ -628,17 +652,6 @@ animations = [{
 }, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_gwowx")
-}],
-"loop": true,
-"name": &"channel7",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_x7q47")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_5nd0y")
 }],
 "loop": true,
 "name": &"channel8",
@@ -750,10 +763,27 @@ animations = [{
 
 [node name="bottomPannel" type="Node2D"]
 script = ExtResource("1_3gtsv")
+balloonInflate = ExtResource("2_b6qpy")
+balloonPop = ExtResource("3_3sfgo")
+golblinNoise = ExtResource("4_3sfgo")
+machineNoise = ExtResource("6_8jv7m")
+fallingNoise = ExtResource("7_3dx3m")
+closingNoise = ExtResource("8_rxdpi")
+RisingNoise = ExtResource("7_3dx3m")
+SteamNoise = ExtResource("9_8jv7m")
+ButtonNoise = ExtResource("10_3dx3m")
+channelAudio2 = ExtResource("2_7xdqn")
+channelAudio3 = ExtResource("3_u1hgx")
+channelAudio4 = ExtResource("3_v2cit")
+channelAudio5 = ExtResource("3_u1hgx")
+channelAudio6 = ExtResource("4_u1hgx")
+channelAudio7 = ExtResource("6_u1hgx")
+channelAudio8 = ExtResource("2_7xdqn")
 
 [node name="bottomPannelAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0qk37")
-animation = &"close"
+animation = &"pump3"
+frame = 7
 
 [node name="goblinTrigger" type="Area2D" parent="." groups=["clickable"]]
 
@@ -816,6 +846,10 @@ animation = &"start"
 frame = 11
 frame_progress = 1.0
 
+[node name="TvAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="pannelAudio" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="animation_finished" from="bottomPannelAnimation" to="." method="_on_bottom_pannel_animation_animation_finished"]
 [connection signal="frame_changed" from="bottomPannelAnimation" to="." method="_on_bottom_pannel_animation_frame_changed"]
 [connection signal="body_entered" from="goblinTrigger" to="." method="_on_goblin_trigger_body_entered"]
@@ -827,3 +861,4 @@ frame_progress = 1.0
 [connection signal="input_event" from="screen/downButton" to="." method="_on_down_button_input_event"]
 [connection signal="input_event" from="screen/leftButton" to="." method="_on_left_button_input_event"]
 [connection signal="animation_finished" from="cloud" to="." method="_on_cloud_animation_finished"]
+[connection signal="finished" from="TvAudio" to="." method="_on_tv_audio_finished"]
